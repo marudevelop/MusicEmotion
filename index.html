@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘 하루는 어땠나요</title>
+    <link rel="stylesheet" href="style.css">
+<body>
+    <section id="today">
+        <p>오늘 하루는 어땠나요</p>
+        <div class="today-list"></div>
+        <div>
+            <p></p>
+            <button onclick=todayNext()>Next ></button>
+        </div>
+    </section>
+    <section id="music">
+        <audio id="song" src="music/dynamite.mp3" controls loop></audio>
+        <div id="like">
+            <p>음악이 마음에 드시나요</p>
+            <button class="music-like">👍</button>
+            <button class="music-like">👎</button>
+            <div>
+                <p></p>
+                <button onclick=likePrev()>< Prev</button><button onclick=likeNext()>Next ></button>
+            </div>
+        </div>
+        <div id="atmosphere">
+            <p>음악의 분위기는 어떤가요</p>
+            <div class="music-list"></div>
+            <div>
+                <p></p>
+                <button onclick=atmospherePrev()>< Prev</button><button onclick=atmosphereNext()>Next ></button>
+            </div>
+        </div>
+    </section>
+    <script src="main.js"></script>
+</head>
+</body>
+</html>

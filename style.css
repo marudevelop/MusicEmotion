@@ -1,0 +1,11 @@
+.today-feeling-active, .music-like-active, .music-atmosphere-active {
+    background: gray;
+}
+
+#today {
+    display: block;
+}
+
+#music, #like, #atmosphere {
+    display: none;
+}
