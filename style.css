@@ -1,11 +1,266 @@
-.today-feeling-active, .music-like-active, .music-atmosphere-active {
-    background: gray;
+html, body {
+    background-color: #fafafa;
+    margin: 0px;
+    padding: 0px;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
-#today {
-    display: block;
+section {
+    width: 100%;
 }
 
-#music, #like, #atmosphere {
+section > div > p, section > p {
+    position: absolute;
+    margin: 0px;
+    top: calc(50% - 33%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    font-size: 25px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.title {
+    top: calc(50% - 33%);
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.time {
+    top: calc(50% - 12.5%);
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.head {
+    top: calc(50% - 45%);
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.emozi {
+    font-size: 150px;
+    top: calc(50% - 10%);
+}
+
+.goodbad {
+    font-size: 130px;
+    top: calc(50% - 5%);
+}
+
+.box {
+    position: absolute;
+    top: calc(50% + 20%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 260px;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 30px -15px gray;
+}
+
+.description {
+    padding: 5px 30px 2px 30px;
+    top: calc(50% - 12%);
+    height: 120px;
+}
+
+.description > p {
+    font-size: 14px;
+}
+
+.box > div > button {
+    margin-top: 10px;
+    width: 49%;
+    height: 45px;
+    padding: 0px;
+    font-size: 14px;
+    font-weight: 800;
+    border-radius: 10px;
+    background-color: gray;
+    color: white;
+    border: none;
+}
+
+.box > div > button:nth-child(1) {
+    background-color: #3182F7;
+}
+
+#login > input {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 220px;
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 20px -10px gray;
+}
+
+#login > button, #info > button{
+    position: absolute;
+    top: calc(50% + 17%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 45px;
+    padding: 14px;
+    font-size: 14px;
+    font-weight: 800;
+    border-radius: 10px;
+    background-color: #3182F7;
+    color: white;
+    border: none;
+}
+
+#login > p:nth-child(1), #info > p:nth-child(1) {
+    top: calc(50% - 20%);
+    font-size: 22px;
+    font-weight: 900;
+}
+
+#login > p:nth-child(2), #info > p:nth-child(2) {
+    top: calc(50% - 15%);
+    font-size: 13px;
+    font-weight: 300;
+}
+
+#end > p:nth-child(1) {
+    top: calc(50% - 2.5%);
+    font-size: 22px;
+    font-weight: 900;
+}
+
+#end > p:nth-child(2) {
+    top: calc(50% + 2.5%);
+    font-size: 13px;
+    font-weight: 300;
+}
+
+#info > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#info > div > input {
+    width: 220px;
+    margin: 5px 0px;
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 20px -10px gray;
+}
+
+.button {
+    display: flex;
+    flex-direction: row-reverse;
+    position: absolute;
+    justify-content: space-between;
+    width: 100%;
+    bottom: 0%;
+}
+
+.button > button {
+    margin: 50px;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 30px;
+    background-color: #3182F7;
+    color: white;
+    border: none;
+}
+
+.button > button:nth-child(2) {
+    background-color: lightgray;
+}
+
+.seekbar {
+    width: 250px;
+    position: absolute;
+    margin: 0px;
+    top: calc(50% - 25%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.range {
+    outline: none;
+    border: none;
+}
+
+.pn-list, .emotion-list, .like-list, .atmosphere-list {
+    width: 300px;
+    position: absolute;
+    margin: 0px;
+    top: calc(50% + 20%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: space-between;
+}
+
+.like-list {
+    width: 200px;
+    top: calc(50% + 20%);
+}
+
+.atmosphere-list {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 3fr 1fr;
+    top: calc(50% + 5%);
+    height: 300px;
+}
+
+.atmosphere-list > p {
+    font-size: 20px;
+}
+
+.range {
+    appearance: none;
+    width: 180px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: rgba(211, 211, 211, 0.5);
+}
+
+.range::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #3182F7;
+    border-radius: 10px;
+}
+
+.pn-feeling, .emotion-feeling, .music-like {
+    margin: 0px 5px;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 30px;
+    background-color: transparent;
+    color: black;
+    border: none;
+}
+
+.music-like {
+    font-size: 60px;
+}
+
+.pn-feeling-active, .emotion-feeling-active, .music-like-active {
+    background-color: #3182F7;
+    color: white;
+}
+
+#login, #info, #today, #emotion, #music, #like, #end {
     display: none;
 }

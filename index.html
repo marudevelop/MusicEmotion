@@ -2,39 +2,99 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>오늘 하루는 어땠나요</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1, width=device-width"/>
+    <title>감정 기반 음악 선호도 조사</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"/>
     <link rel="stylesheet" href="style.css">
 <body>
+    <section id="home">
+        <div id="opening">
+            <p class="title">감정 기반<br>음악 선호도 조사</p>
+            <div class="box description">
+                <p>DSLab에서 감정 기반 음악 추천 연구를 위해<br>'감정 기반 음악 선호도 조사'를 실시합니다.</p>
+                <p style="margin-top: -5px; float: left; font-size: 14px; font-weight: 700;">※ 경품:&nbsp;</p><p style="margin-top: -5px; font-size: 154x;">설문자 선착순 100분께 커피 쿠폰 발송</p>
+                <p style="margin-top: -5px; float: left; font-size: 14px; font-weight: 700;">※ 소요 시간:&nbsp;</p><p style="margin-top: -5px; font-size: 154x;">최소 10분 ~ 최대 3시간</p>
+            </div>
+            <div class="box">
+                <p style="margin: 0px; font-size: 18px; font-weight: 800; width: 100%; text-align: center;">개인정보 수집 및 이용 동의</p>
+                <p style="margin-top: 20px; float: left; font-size: 15px; font-weight: 700;">1. 수집 목적:&nbsp;</p><p style="margin-top: 20px; font-size: 15px;">설문조사 응답자 기프티콘 보상</p>
+                <p style="margin: 0px; float: left; font-size: 15px; font-weight: 700;">2. 수집 항목:&nbsp;</p><p style="font-size: 15px;">이메일, 학번, 이름</p>
+                <p style="margin: 0px; float: left; font-size: 15px; font-weight: 700;">3. 보유 및 이용 기간:&nbsp;</p><p style="font-size: 15px;">2024년 9월까지</p>
+                <div style="width: 100%; display: flex; justify-content: space-between;">
+                    <button onclick=openingNext()>동의하고 시작하기</button><button onclick="alert('동의한 사람에 한해\n설문조사와 기프티콘 보상이 진행됩니다.')">동의하지 않습니다</button>
+                </div>
+            </div>
+        </div>
+        <div id="login">
+            <p>이메일을 입력해주세요</p>
+            <p>중간에 나가도 나중에 이어서 할 수 있습니다</p>
+            <input id="id" type="email" placeholder="example@example.com">
+            <button id="firstMusic">설문조사 시작하기 및 이어하기</button>
+        </div>
+        <div id="info">
+            <p>학번과 이름을 입력해주세요</p>
+            <p>※ 기프티콘 중복 보상 방지를 위한 절차입니다 ※</p>
+            <div>
+                <input id="num" type="number" placeholder="20241234">
+                <input id="name" type="text" placeholder="홍길동">
+            </div>
+            <button id="addInfo">등록하고 설문조사 시작하기</button>
+        </div>
+    </section>
     <section id="today">
         <p>오늘 하루는 어땠나요</p>
-        <div class="today-list"></div>
-        <div>
-            <p></p>
-            <button onclick=todayNext()>Next ></button>
+        <p class="emozi"></p>
+        <div id="pn">
+            <div class="pn-list">
+                <button class="pn-feeling"><p id="emoticon" style="margin: 0px; font-size: 60px;">🙂</p>긍정</button>
+                <button class="pn-feeling"><p id="emoticon" style="margin: 0px; font-size: 60px;">😐</p>중립</button>
+                <button class="pn-feeling"><p id="emoticon" style="margin: 0px; font-size: 60px;">🙁</p>부정</button>
+            </div>
+            <div class="button">
+                <button onclick=pnNext()>Next ></button><button onclick=pnPrev()>< Prev</button>
+            </div>
+        </div>
+        <div id="emotion">
+            <div class="emotion-list"></div>
+            <div class="button">
+                <button onclick=emotionNext()>Next ></button><button onclick=emotionPrev()>< Prev</button>
+            </div>
         </div>
     </section>
     <section id="music">
-        <audio id="song" src="music/dynamite.mp3" controls loop></audio>
+        <audio hidden id="$audio" src="" controls loop></audio>
+        <input type="range" step="any" id="$seekbar" class="seekbar" value="0">
+        <p class="head">곡 현황 0 / 50</p>
         <div id="like">
             <p>음악이 마음에 드시나요</p>
-            <button class="music-like">👍</button>
-            <button class="music-like">👎</button>
-            <div>
-                <p></p>
-                <button onclick=likePrev()>< Prev</button><button onclick=likeNext()>Next ></button>
+            <p class="goodbad"></p>
+            <div class="like-list">
+                <button class="music-like">👍</button>
+                <button class="music-like">👎</button>
+            </div>
+            <div class="button">
+                <button onclick=likeNext()>Next ></button><button onclick=likePrev()>< Prev</button>
             </div>
         </div>
         <div id="atmosphere">
             <p>음악의 분위기는 어떤가요</p>
-            <div class="music-list"></div>
-            <div>
-                <p></p>
-                <button onclick=atmospherePrev()>< Prev</button><button onclick=atmosphereNext()>Next ></button>
+            <div class="atmosphere-list">
+                <p>차분</p><input id="$atm1" type="range" class="range" min="-4" max="4" step="1"><p>신남</p>
+                <p>슬픔</p><input id="$atm2" type="range" class="range" min="-4" max="4" step="1"><p>기쁨</p>
+                <p>어둠</p><input id="$atm3" type="range" class="range" min="-4" max="4" step="1"><p>밝음</p>
+            </div>
+            <div class="button">
+                <button id="addData">Next ></button><button onclick=atmospherePrev()>< Prev</button>
             </div>
         </div>
     </section>
+    <section id="end">
+        <p>설문조사가 모두 끝났습니다</p>
+        <p>응답을 위해 소중한 시간을 내어 주셔서 진심으로 감사드립니다</p>
+    </section>
+    <script src="data.js"></script>
     <script src="main.js"></script>
+    <script type="module" src="module.js"></script>
 </head>
 </body>
 </html>

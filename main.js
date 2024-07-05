@@ -1,34 +1,50 @@
-var feelingList = ["😄", "🙂", "😪", "😡", "🤔", "😵‍💫", "😢", "😒", "😱", "😷"];
-var atmosphereList = ["경쾌한", "우울한", "슬픈", "로맨틱한", "긴장감 있는", "편안한", "신나는", "어두운", "몽환적인", "희망적인", "강렬한", "행복한", "차분한", "웅장한", "고요한"];
+$audio.onloadedmetadata = () => $seekbar.max = $audio.duration
+$seekbar.onchange = () => $audio.currentTime = $seekbar.value
+$audio.ontimeupdate = () => $seekbar.value = $audio.currentTime
 
-var todayList = document.querySelector('.today-list');
-for (var i = 0; i < feelingList.length; i++) {
-    todayList.innerHTML += '<button class="today-feeling">' + feelingList[i] + '</button>';
+$atm1.onchange = () => {
+    atmosphere[0] = $atm1.value;
+    savedData[nowIndex] = {
+        selectedLikeE: selectedLikeE,
+        atmosphere: atmosphere
+    }
 }
-
-var musicList = document.querySelector('.music-list');
-for (var i = 0; i < atmosphereList.length; i++) {
-    musicList.innerHTML += '<button class="music-atmosphere">' + atmosphereList[i] + '</button>';
+$atm2.onchange = () => {
+    atmosphere[1] = $atm2.value;
+    savedData[nowIndex] = {
+        selectedLikeE: selectedLikeE,
+        atmosphere: atmosphere
+    }
 }
-
-var selectedFeelings = [];
-var feelings = document.querySelectorAll('.today-feeling');
-
-function clickFeelingHandler() {
-    if (this.classList.length > 1){
-        this.classList.remove('today-feeling-active');
-        selectedFeelings.pop(this)
-    } else {
-        this.classList.add('today-feeling-active');
-        selectedFeelings.push(this)
+$atm3.onchange = () => {
+    atmosphere[2] = $atm3.value;
+    savedData[nowIndex] = {
+        selectedLikeE: selectedLikeE,
+        atmosphere: atmosphere
     }
 }
 
-for (var i = 0; i < feelings.length; i++) {
-    feelings[i].addEventListener('click', clickFeelingHandler);        
+//--------------------------------------------------------------------------------------------//
+
+var feelings = document.querySelectorAll('.pn-feeling');
+
+function clickPNHandler() {
+    if (selectedPN){
+        selectedPN.classList.remove('pn-feeling-active');  
+    }   
+    this.classList.add('pn-feeling-active');
+    selectedPN = this;
+    selectedPNE = selectedPN.querySelector('p').textContent;
+    selectedEmotionE = null;
+    document.querySelector('.emozi').innerHTML = selectedPNE;
 }
 
-var selectedLike;
+for (var i = 0; i < feelings.length; i++) {
+    feelings[i].addEventListener('click', clickPNHandler);        
+}
+
+//--------------------------------------------------------------------------------------------//
+
 var likes = document.querySelectorAll('.music-like');
 
 function clickLikeHandler() {
@@ -37,65 +53,142 @@ function clickLikeHandler() {
     }   
     this.classList.add('music-like-active');
     selectedLike = this;
+    selectedLikeE = selectedLike.innerText;
+    document.querySelector('.goodbad').innerHTML = selectedLikeE;
+    savedData[nowIndex] = {
+        selectedLikeE: selectedLikeE,
+        atmosphere: atmosphere
+    }
 }
 
 for (var i = 0; i < likes.length; i++) {
     likes[i].addEventListener('click', clickLikeHandler);        
 }
 
-var selectedAtmospheres = [];
-var atmospheres = document.querySelectorAll('.music-atmosphere');
+//--------------------------------------------------------------------------------------------//
 
-function clickAtmosphereHandler() {
-    if (this.classList.length > 1){
-        this.classList.remove('music-atmosphere-active');
-        selectedAtmospheres.pop(this);
-    } else {
-        this.classList.add('music-atmosphere-active');
-        selectedAtmospheres.push(this);
+function openingNext() {
+    document.getElementById('opening').style.display = "none";
+    document.getElementById('login').style.display = "block";
+}
+
+function pnPrev() {
+    document.getElementById('home').style.display = "block";
+    document.getElementById('today').style.display = "none";
+}
+
+function pnNext() {
+    if (selectedPN) {
+        if (selectedPNE == '😐') {
+            selectedEmotionE = '😐'
+            emotionNext();
+        } else {
+            if (selectedPNE == '🙁') {
+                var emotionList = document.querySelector('.emotion-list');
+                emotionList.innerHTML = '';
+                for (var i = 0; i < emoziN.length; i++) {
+                    emotionList.innerHTML += '<button class="emotion-feeling">' + emoziN[i] + '</button>';
+                }
+            } else {
+                var emotionList = document.querySelector('.emotion-list');
+                emotionList.innerHTML = '';
+                for (var i = 0; i < emoziP.length; i++) {
+                    emotionList.innerHTML += '<button class="emotion-feeling">' + emoziP[i] + '</button>';
+                }
+            }
+            var emotions = document.querySelectorAll('.emotion-feeling');
+
+            function clickEmotionHandler() {
+                if (selectedEmotion){
+                    selectedEmotion.classList.remove('emotion-feeling-active');  
+                }   
+                this.classList.add('emotion-feeling-active');
+                selectedEmotion = this;
+                selectedEmotionE = selectedEmotion.querySelector('p').textContent;
+                document.querySelector('.emozi').innerHTML = selectedEmotionE;
+            }
+
+            for (var i = 0; i < emotions.length; i++) {
+                emotions[i].addEventListener('click', clickEmotionHandler);        
+            }
+            
+            document.getElementById('pn').style.display = "none";
+            document.getElementById('emotion').style.display = "block";
+        }
     }
 }
 
-for (var i = 0; i < atmospheres.length; i++) {
-    atmospheres[i].addEventListener('click', clickAtmosphereHandler);        
+function emotionPrev() {
+    document.getElementById('pn').style.display = "block";
+    document.getElementById('emotion').style.display = "none";
+    selectedEmotionE = null;
 }
 
-function todayNext() {
-    if (selectedFeelings.length > 0) {
+function emotionNext() {
+    if (selectedEmotionE) {
+        document.querySelector('.head').innerHTML = "곡 현황 " + String(nowIndex+1) + " / 50";
         document.getElementById('today').style.display = "none";
         document.getElementById('music').style.display = "block";
         document.getElementById('like').style.display = "block";
         document.getElementById('atmosphere').style.display = "none";
-        document.getElementById('song').play();
+        audio = document.getElementById('$audio');
+        urlList.sort();
+        audio.src = urlList[nowIndex];
+        audio.currentTime = 0;
+        audio.play();
     }
 }
 
 function likePrev() {
-    document.getElementById('today').style.display = "block";
-    document.getElementById('music').style.display = "none";
-    document.getElementById('like').style.display = "none";
-    document.getElementById('atmosphere').style.display = "none";
-    audio = document.getElementById('song');
-    audio.pause();
-    audio.currentTime = 0;
+    if (nowIndex == firstIndex) {
+        document.getElementById('today').style.display = "block";
+        document.getElementById('music').style.display = "none";
+        document.getElementById('like').style.display = "none";
+        document.getElementById('atmosphere').style.display = "none";
+        audio = document.getElementById('$audio');
+        audio.pause();
+        audio.currentTime = 0;
+    } else {
+        nowIndex--;
+
+        document.querySelector('.head').innerHTML = "곡 현황 " + String(nowIndex+1) + " / 50";
+
+        selectedLikeE = savedData[nowIndex]["selectedLikeE"];
+        atmosphere = savedData[nowIndex]["atmosphere"];
+        $atm1.value = atmosphere[0];
+        $atm2.value = atmosphere[1];
+        $atm3.value = atmosphere[2];
+        document.querySelector(".goodbad").innerHTML = selectedLikeE;
+        likes = document.querySelectorAll('.music-like');
+        for (var i = 0; i < likes.length; i++) {
+            if (likes[i].classList.length > 1) {
+                likes[i].classList.remove('music-like-active');
+            }
+            if (likes[i].innerText == selectedLikeE) {
+                likes[i].classList.add('music-like-active');
+                selectedLike = likes[i];
+            }
+        }
+
+        document.getElementById('like').style.display = "none";
+        document.getElementById('atmosphere').style.display = "block";
+        audio = document.getElementById('$audio');
+        audio.pause();
+        urlList.sort();
+        audio.src = urlList[nowIndex];
+        audio.currentTime = 0;
+        audio.play();
+    }
 }
 
 function likeNext() {
     if (selectedLike) {
-        document.getElementById('today').style.display = "none";
-        document.getElementById('music').style.display = "block";
         document.getElementById('like').style.display = "none";
         document.getElementById('atmosphere').style.display = "block";
     }
 }
 
 function atmospherePrev() {
-    document.getElementById('today').style.display = "none";
-    document.getElementById('music').style.display = "block";
     document.getElementById('like').style.display = "block";
     document.getElementById('atmosphere').style.display = "none";
-}
-
-function atmosphereNext() {
-    // TODO
 }
