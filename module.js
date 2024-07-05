@@ -86,7 +86,7 @@ async function addInfo() {
     const name = document.getElementById('name').value;
 
     if (num != "" && name != "") {
-        shuffle(urlList);
+        urlList.sort(() => Math.random() - 0.5);
 
         await setDoc(doc(db, id, "info"), {
             num: num,
