@@ -114,7 +114,8 @@ async function addData() {
         document.getElementById('like').style.display = "block";
         document.getElementById('atmosphere').style.display = "none";
 
-        if (savedData.length > nowIndex - firstIndex) {
+        if (savedData.length > nowIndex) {
+            console.log(savedData.length);
             selectedLikeE = savedData[nowIndex]["selectedLikeE"];
             atmosphere = savedData[nowIndex]["atmosphere"];
             $atm1.value = atmosphere[0];
