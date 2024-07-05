@@ -33,7 +33,13 @@ async function firstMusic() {
     id = document.getElementById('id').value
     if (id != "") {
         if (!id.startsWith('@') && id.includes('@') && id.includes('.') && !id.endsWith('.')) {
-            urlList.sort();
+            const docRef0 = doc(db, id, "info");
+            const docSnap0 = await getDoc(docRef0);
+
+            if (docSnap0.exists()) {
+                urlList = docSnap0.data()["list"];
+            }
+
             if (firstIndex == null) {
                 for (var i = 0; i < urlList.length; i++) {
                     const docRef = doc(db, id, String(i));
@@ -75,13 +81,17 @@ async function firstMusic() {
 }
 
 async function addInfo() {
+
     const num = document.getElementById('num').value;
     const name = document.getElementById('name').value;
 
     if (num != "" && name != "") {
+        shuffle(urlList);
+
         await setDoc(doc(db, id, "info"), {
             num: num,
-            name: name
+            name: name,
+            list: urlList
         });
         document.getElementById('home').style.display = "none";
         document.getElementById('today').style.display = "block";
@@ -149,7 +159,6 @@ async function addData() {
 
         audio = document.getElementById('$audio');
         audio.pause();
-        urlList.sort();
         audio.src = urlList[nowIndex];
         audio.currentTime = 0;
         audio.play();

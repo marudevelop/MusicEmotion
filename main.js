@@ -132,7 +132,6 @@ function emotionNext() {
         document.getElementById('like').style.display = "block";
         document.getElementById('atmosphere').style.display = "none";
         audio = document.getElementById('$audio');
-        urlList.sort();
         audio.src = urlList[nowIndex];
         audio.currentTime = 0;
         audio.play();
@@ -174,7 +173,6 @@ function likePrev() {
         document.getElementById('atmosphere').style.display = "block";
         audio = document.getElementById('$audio');
         audio.pause();
-        urlList.sort();
         audio.src = urlList[nowIndex];
         audio.currentTime = 0;
         audio.play();
