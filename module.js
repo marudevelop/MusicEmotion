@@ -1,5 +1,4 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getStorage, ref, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
 import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -13,17 +12,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const storage = getStorage();
-
-const musicRef = ref(storage, 'music');
-
-listAll(musicRef).then(async (res) => {
-    await res.items.forEach((itemRef) => {
-        getDownloadURL(itemRef).then((url) => {
-            urlList.push(url);
-        });
-    });
-});
 
 document.querySelector('#firstMusic').addEventListener('click', firstMusic)
 document.querySelector('#addInfo').addEventListener('click', addInfo)
@@ -37,11 +25,11 @@ async function firstMusic() {
             const docSnap0 = await getDoc(docRef0);
 
             if (docSnap0.exists()) {
-                urlList = docSnap0.data()["list"];
+                musicList = docSnap0.data()["list"];
             }
 
             if (firstIndex == null) {
-                for (var i = 0; i < urlList.length; i++) {
+                for (var i = 0; i < musicList.length; i++) {
                     const docRef = doc(db, id, String(i));
                     const docSnap = await getDoc(docRef);
         
@@ -55,7 +43,7 @@ async function firstMusic() {
                 const docSnap1 = await getDoc(docRef1);
     
                 if (docSnap1.exists()) {
-                    if (nowIndex == urlList.length-1) {
+                    if (nowIndex == musicList.length-1) {
                         document.getElementById('home').style.display = "none";
                         document.getElementById('today').style.display = "none";
                         document.getElementById('music').style.display = "none";
@@ -86,12 +74,12 @@ async function addInfo() {
     const name = document.getElementById('name').value;
 
     if (num != "" && name != "") {
-        urlList.sort(() => Math.random() - 0.5);
+        musicList.sort(() => Math.random() - 0.5);
 
         await setDoc(doc(db, id, "info"), {
             num: num,
             name: name,
-            list: urlList
+            list: musicList
         });
         document.getElementById('home').style.display = "none";
         document.getElementById('today').style.display = "block";
@@ -159,7 +147,7 @@ async function addData() {
 
         audio = document.getElementById('$audio');
         audio.pause();
-        audio.src = urlList[nowIndex];
+        audio.src = './music/' + musicList[nowIndex];
         audio.currentTime = 0;
         audio.play();
     }
