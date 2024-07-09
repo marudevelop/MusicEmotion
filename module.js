@@ -81,6 +81,7 @@ async function addInfo() {
             name: name,
             list: musicList
         });
+        
         document.getElementById('home').style.display = "none";
         document.getElementById('today').style.display = "block";
     } else {
