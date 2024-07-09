@@ -32,18 +32,17 @@ async function firstMusic() {
                 for (var i = 0; i < musicList.length; i++) {
                     const docRef = doc(db, id, String(i));
                     const docSnap = await getDoc(docRef);
+
+                    firstIndex++;
+                    nowIndex++;
         
-                    if (!docSnap.exists()) {
-                        firstIndex = i;
-                        nowIndex = firstIndex;
-                        break;
-                    }
+                    if (!docSnap.exists()) break;
                 }
                 const docRef1 = doc(db, id, "info");
                 const docSnap1 = await getDoc(docRef1);
     
                 if (docSnap1.exists()) {
-                    if (nowIndex == musicList.length-1) {
+                    if (nowIndex == musicList.length) {
                         document.getElementById('home').style.display = "none";
                         document.getElementById('today').style.display = "none";
                         document.getElementById('music').style.display = "none";
