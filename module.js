@@ -29,15 +29,19 @@ async function firstMusic() {
             }
 
             if (firstIndex == null) {
+                firstIndex = 0;
+                nowIndex = 0;
+
                 for (var i = 0; i < musicList.length; i++) {
                     const docRef = doc(db, id, String(i));
                     const docSnap = await getDoc(docRef);
+        
+                    if (!docSnap.exists()) break;
 
                     firstIndex++;
                     nowIndex++;
-        
-                    if (!docSnap.exists()) break;
                 }
+
                 const docRef1 = doc(db, id, "info");
                 const docSnap1 = await getDoc(docRef1);
     
