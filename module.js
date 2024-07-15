@@ -2,12 +2,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase
 import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDhC3uheUH8hs4Flw8ugTb04b3OYqpQntc",
-    authDomain: "music-emotion-b5263.firebaseapp.com",
-    projectId: "music-emotion-b5263",
-    storageBucket: "music-emotion-b5263.appspot.com",
-    messagingSenderId: "671988490688",
-    appId: "1:671988490688:web:e4e5fbb6e520322bcea825"
+    apiKey: process.env.REACT_APP_apiKey,
+    authDomain: process.env.REACT_APP_authDomain,
+    projectId: process.env.REACT_APP_projectId,
+    storageBucket: process.env.REACT_APP_storageBucket,
+    messagingSenderId: process.env.REACT_APP_messagingSenderId,
+    appId: process.env.REACT_APP_appId
 };
 
 const app = initializeApp(firebaseConfig);
