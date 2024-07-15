@@ -127,6 +127,7 @@ function emotionPrev() {
 function emotionNext() {
     if (selectedEmotionE) {
         document.querySelector('.head').innerHTML = "곡 현황 " + String(nowIndex+1) + " / 50";
+        document.querySelector('.todayE').innerHTML = "음악이 오늘 기분 " + selectedEmotionE + "에 잘 맞나요";
         document.getElementById('today').style.display = "none";
         document.getElementById('music').style.display = "block";
         document.getElementById('like').style.display = "block";
@@ -189,4 +190,20 @@ function likeNext() {
 function atmospherePrev() {
     document.getElementById('like').style.display = "block";
     document.getElementById('atmosphere').style.display = "none";
+}
+
+//--------------------------------------------------------------------------------------------//
+
+function playPause() {
+    if (isPlay) {
+        isPlay = false;
+        audio = document.getElementById('$audio');
+        audio.pause();
+        document.getElementById("icon").src = './image/play.svg';
+    } else {
+        isPlay = true;
+        audio = document.getElementById('$audio');
+        audio.play();
+        document.getElementById("icon").src = './image/pause.svg';
+    }
 }

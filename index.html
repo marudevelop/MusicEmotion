@@ -64,9 +64,10 @@
     <section id="music">
         <audio hidden id="$audio" src="" controls loop></audio>
         <input type="range" step="any" id="$seekbar" class="seekbar" value="0">
+        <button onclick=playPause()><img id="icon" src="image/pause.svg"></button>
         <p class="head">곡 현황 0 / 50</p>
         <div id="like">
-            <p>음악이 오늘의 기분에 잘 맞나요</p>
+            <p class="todayE"></p>
             <p class="goodbad"></p>
             <div class="like-list">
                 <button class="music-like">👍</button>

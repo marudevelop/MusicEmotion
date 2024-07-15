@@ -68,4 +68,6 @@ var atmosphere = [0, 0, 0];
 var firstIndex;
 var nowIndex;
 
+var isPlay = true;
+
 var savedData = [];
