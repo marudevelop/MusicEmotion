@@ -171,6 +171,8 @@ section > div > p, section > p {
     border-radius: 13px;
     background-color: white;
     box-shadow: 0px 0px 5px -2px gray;
+    outline: none;
+    border: none;
 }
 
 #music > button > img {
