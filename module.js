@@ -108,6 +108,7 @@ async function addData() {
         audio = document.getElementById('$audio');
         audio.pause();
         audio.currentTime = 0;
+        document.getElementById("icon").src = './image/pause.svg';
     } else {
         nowIndex++;
 
@@ -154,5 +155,6 @@ async function addData() {
         audio.src = './music/' + musicList[nowIndex];
         audio.currentTime = 0;
         audio.play();
+        document.getElementById("icon").src = './image/pause.svg';
     }
 }
