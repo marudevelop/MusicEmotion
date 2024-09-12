@@ -126,7 +126,7 @@ function emotionPrev() {
 
 function emotionNext() {
     if (selectedEmotionE) {
-        document.querySelector('.head').innerHTML = "곡 현황 " + String(nowIndex+1) + " / 50";
+        document.querySelector('.head').innerHTML = "곡 현황 " + String(nowIndex+1) + " / 30";
         document.querySelector('.todayE').innerHTML = "음악이 오늘 기분 " + selectedEmotionE + "에 잘 맞나요";
         document.getElementById('today').style.display = "none";
         document.getElementById('music').style.display = "block";
@@ -152,7 +152,7 @@ function likePrev() {
     } else {
         nowIndex--;
 
-        document.querySelector('.head').innerHTML = "곡 현황 " + String(nowIndex+1) + " / 50";
+        document.querySelector('.head').innerHTML = "곡 현황 " + String(nowIndex+1) + " / 30";
 
         selectedLikeE = savedData[nowIndex]["selectedLikeE"];
         atmosphere = savedData[nowIndex]["atmosphere"];

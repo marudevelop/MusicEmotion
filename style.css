@@ -143,6 +143,7 @@ section > div > p, section > p {
 }
 
 #info > div {
+    width: 240px;
     position: absolute;
     top: 50%;
     left: 50%;

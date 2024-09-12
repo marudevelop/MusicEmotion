@@ -99,7 +99,7 @@ async function addData() {
         atmosphere: atmosphere
     });
 
-    if (nowIndex == 49) {
+    if (nowIndex == 29) {
         document.getElementById('home').style.display = "none";
         document.getElementById('today').style.display = "none";
         document.getElementById('music').style.display = "none";
@@ -112,7 +112,7 @@ async function addData() {
     } else {
         nowIndex++;
 
-        document.querySelector('.head').innerHTML = "곡 현황 " + String(nowIndex+1) + " / 50";
+        document.querySelector('.head').innerHTML = "곡 현황 " + String(nowIndex+1) + " / 30";
 
         document.getElementById('like').style.display = "block";
         document.getElementById('atmosphere').style.display = "none";
